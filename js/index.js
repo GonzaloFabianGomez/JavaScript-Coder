@@ -10,6 +10,34 @@ class Producto {
         this.img = img
     }
 
+    desplegarProductos(){
+        const card = `
+        <div class="card">
+
+            <p>${this.nombre}</p>
+
+            <div>
+                <img class='imgProducto' src=${this.img} alt="foto del producto"/>
+            </div>
+
+            <div>
+                <p>$${this.precio}</p>
+            </div>
+
+            <div class="btn-container">
+                <button id=${this.id} class='btnAgregar'>AGREGAR AL CARRITO</button>
+            </div>
+
+        </div>
+    `
+        const container = document.getElementById('container')
+        container.innerHTML += card
+    }
+    agregarEvento(){
+        const btnAgregar = document.getElementById(this.id)
+        const productoEncontrado = productos.find(product => product.id == this.id)
+        btnAgregar.addEventListener('click', () => agregarAlCarrito(productoEncontrado))
+    }
 };
 
 
@@ -30,3 +58,11 @@ let producto7 = new Producto("Parlante", 7, 55000, './img/producto7.jpg');
 let producto8 = new Producto("Aire Acondicionado", 8, 150000, './img/producto8.jpg');
 
 productos.push(producto1, producto2, producto3, producto4, producto5, producto6, producto7, producto8);
+
+productos.forEach(e => {
+    e.desplegarProductos()
+})
+
+productos.forEach(e => {
+    e.agregarEvento()
+})
